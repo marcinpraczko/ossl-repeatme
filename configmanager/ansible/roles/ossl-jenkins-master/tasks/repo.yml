@@ -1,0 +1,21 @@
+---
+# Working with: ansible: 1.2
+#
+# Task: Install required files to install yum repo from Jenkins (latest versions)
+#
+# Install RPM Key and Yum repo file
+# Based on page: http://pkg.jenkins-ci.org/redhat/
+# - Download key first then import from file, not run 'download' for each run of ansible
+#   This will speed up run playbook a bit
+
+- name: OSSL-Jenkins master | Download RPM Key
+  get_url: url={{ gossl_jenkins_key }} dest={{ gossl_jenkins_key_local }}
+    owner=root group=root mode=0600 force=no
+
+- name: OSSL-Jenkins master | Import RPM key
+  shell: rpm --import {{ gossl_jenkins_key_local }}
+
+- name: OSSL-Jenkins master | Download Yum repository file
+  get_url: url={{ gossl_jenkins_repo }}
+    dest=/etc/yum.repos.d/jenkins.repo
+    owner=root group=root mode=0600 force=no

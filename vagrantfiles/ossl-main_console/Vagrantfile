@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# ----------------------------------------------------------------------------
+# 2013 by Marcin Praczko
+#
+# OSSL-repeatme project
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# This vargant configuration is for:
+# - Testing differnet things like provisioning from scratch, etc
+# - Playing with Linux after initial installation
+# - Have main console VM for managing others VMs
+#
+# Vagrant box : Clean CentOS 6.4 x86_64
+# Provisioning: Shell scripts
+# ----------------------------------------------------------------------------
+
+# Full documentation is available at:
+# http://docs.vagrantup.com/v2/
+
+Vagrant.configure("2") do |config|
+
+  # VM - Main console
+  config.vm.define :console do |console|
+    console.vm.box = "ossl_centos64_x86_64_clean"
+
+    # VagrantBox MD5 : b5f1ea8d83914c653da6a623b25b4c7f
+    # VagrantBox SHA1: 65dadf6c7ae4ff6810b145bd68da0be5eacc9433
+    console.vm.box_url = "http://www.silentlinux.info/vagrantbox/ossl_vagrant_centos_64_x86_64.box"
+    console.vm.hostname = "ossl-console"
+
+    # --- Hardware configuration for VirtualBox ---
+    console.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+
+    # --- Internal network only ---
+    # This interface will be used for connecting with others VMs via internal
+    # network
+    console.vm.network :private_network, ip: "192.168.79.254"
+
+    # --- Forwarding ports ---
+    # HTTP / HTTPS
+    console.vm.network :forwarded_port, guest: 80,   host: 10080
+    console.vm.network :forwarded_port, guest: 443,  host: 10443
+    # Jenkins
+    console.vm.network :forwarded_port, guest: 8080, host: 18080
+
+    # --- Shared folders ---
+    # Mount ansible playbooks
+    console.vm.synced_folder "../../configmanager/ansible/", "/src/ansible"
+
+    # --- Basic provisioning ---
+    # Run shell script
+    console.vm.provision :shell, :path => "../../provisioning/shell/bootstrap-ansible.sh"
+  end
+
+end

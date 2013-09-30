@@ -1,0 +1,34 @@
+---
+# This role is designed for initial setup ossl-console VM
+# Ansible: 1.2
+
+- name: OSSL-Console | Create ansible workspace directories
+  sudo: yes
+  file: path={{ item }} owner=vagrant group=users mode=0700 state=directory recurse=no
+  with_items:
+    - /src/ansible-workspace
+    - /src/ansible-workspace/inventory
+    - /src/ansible-workspace/store
+    - /src/ansible-workspace/store/keys
+    - /src/ansible-workspace/from_git
+    - /src/ansible-workspace/logs
+    - /src/ansible-workspace/logs/scripts
+
+- name: OSSL-Console | Install git (required for download others things)
+  sudo: yes
+  yum: name={{ item }} state=present
+  with_items:
+    - git
+
+- name: OSSL-Console | Clone vagrant from git
+  git: repo=https://github.com/mitchellh/vagrant.git
+       dest=/src/ansible-workspace/from_git/vagrant
+
+- name: OSSL-Console | Copy vagrant SSH insecure pair keys to store folder
+  copy: src={{ item }} dest=/src/ansible-workspace/store/keys/ owner=vagrant group=users mode=0600
+  with_items:
+    - /src/ansible-workspace/from_git/vagrant/keys/vagrant
+    - /src/ansible-workspace/from_git/vagrant/keys/vagrant.pub
+
+- name: OSSL-Console | Add localhost to know hosts on vagrant user
+  script: /src/ansible/scripts/shell/ssh_add_to_knowhosts.sh >>/src/ansible-workspace/logs/scripts/ssh_add_to_knowhosts.sh.log 2>&1

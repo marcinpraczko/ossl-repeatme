@@ -1,0 +1,20 @@
+---
+# Playbook: Initial configuration for VM: ossl-console
+# - Download Vagrant SSH Keys (this allows login to vagrant machines without password)
+# Working with: ansible: 1.2
+
+- name: OSSL-Console | Prepare VM for work with ansible and vagrant
+  hosts: vms-ossl-console
+  connection: local
+
+  roles:
+    - ossl-console-init
+
+- name: OSSL-Console | Check access over SSH / SUDO to VM
+  hosts: vms-ossl-console
+  sudo: yes
+  user: vagrant
+
+  tasks:
+  - name: OSSL-Console | Basic ping test
+    ping:

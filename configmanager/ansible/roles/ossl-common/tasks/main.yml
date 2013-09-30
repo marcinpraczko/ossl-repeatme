@@ -1,0 +1,10 @@
+---
+# Working with: ansible: 1.2
+#
+# Tasks: Setup common configuration on all OSSL VMs.
+
+- name: OSSL-Common | Create folders for configuration
+  file: dest=/root/{{ item }} owner=root group=root mode=0700 recurse=no state=directory
+  with_items:
+    - ossl-ansible-cfg
+    - ossl-ansible-cfg/cache

@@ -1,0 +1,16 @@
+---
+# Playbook: Configure hosts for build servers
+# - Intall all required software to allow build machines working quickly
+# Working with: ansible: 1.2
+
+- name: OSSL-Build | Configure build hosts
+  hosts: vms-build
+  sudo: yes
+  user: vagrant
+
+  vars_files:
+    - vars/jenkins.yml
+
+  roles:
+    - ossl-common
+    - ossl-jenkins-master

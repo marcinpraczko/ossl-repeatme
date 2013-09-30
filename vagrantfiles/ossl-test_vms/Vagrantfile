@@ -1,0 +1,63 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# ----------------------------------------------------------------------------
+# 2013 by Marcin Praczko
+#
+# OSSL-repeatme project
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# This vargant configuration is for:
+# - Testing everything by using 2 VMs (Connections via LAN, services, etc)
+#
+# Vagrant box : Clean CentOS 6.4 x86_64
+# Provisioning: Shell scripts
+# ----------------------------------------------------------------------------
+
+# Full documentation is available at:
+# http://docs.vagrantup.com/v2/
+
+Vagrant.configure("2") do |config|
+
+  # VM - Testing VM01
+  config.vm.define :vmtest01 do |vmtest01|
+    vmtest01.vm.box = "ossl_centos64_x86_64_clean"
+
+    # VagrantBox MD5 : b5f1ea8d83914c653da6a623b25b4c7f
+    # VagrantBox SHA1: 65dadf6c7ae4ff6810b145bd68da0be5eacc9433
+    vmtest01.vm.box_url = "http://www.silentlinux.info/vagrantbox/ossl_vagrant_centos_64_x86_64.box"
+    vmtest01.vm.hostname = "ossl-test"
+
+    # --- Internal network only ---
+    # This interface will be used for connecting with others VMs via internal
+    # network
+    vmtest01.vm.network :private_network, ip: "192.168.79.252"
+
+    # --- Forwarding ports ---
+    # HTTP / HTTPS
+    vmtest01.vm.network :forwarded_port, guest: 80,   host: 20080
+    vmtest01.vm.network :forwarded_port, guest: 443,  host: 20443
+  end
+
+  # VM - Testing VM02
+  config.vm.define :vmtest02 do |vmtest02|
+    vmtest02.vm.box = "ossl_centos64_x86_64_clean"
+
+    # VagrantBox MD5 : b5f1ea8d83914c653da6a623b25b4c7f
+    # VagrantBox SHA1: 65dadf6c7ae4ff6810b145bd68da0be5eacc9433
+    vmtest02.vm.box_url = "http://www.silentlinux.info/vagrantbox/ossl_vagrant_centos_64_x86_64.box"
+    vmtest02.vm.hostname = "ossl-test"
+
+    # --- Internal network only ---
+    # This interface will be used for connecting with others VMs via internal
+    # network
+    vmtest02.vm.network :private_network, ip: "192.168.79.253"
+
+    # --- Forwarding ports ---
+    # HTTP / HTTPS
+    vmtest02.vm.network :forwarded_port, guest: 80,   host: 30080
+    vmtest02.vm.network :forwarded_port, guest: 443,  host: 30443
+  end
+
+end

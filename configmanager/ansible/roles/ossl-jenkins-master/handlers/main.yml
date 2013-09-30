@@ -1,0 +1,10 @@
+---
+# Handlers: Restart Jenkins
+
+- name: restart jenkins
+  service: name=jenkins state=restarted
+  register: jenkins_service
+
+- name: restart iptables
+  service: name=iptables state=restarted
+  register: iptables_service
