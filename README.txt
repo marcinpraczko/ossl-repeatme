@@ -1,9 +1,6 @@
                                   README.txt
                                   ==========
 
-Author: Marcin Praczko
-Date: 2013-09-30 22:45:51 BST
-
 
 Table of Contents
 =================
