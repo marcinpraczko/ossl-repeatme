@@ -10,7 +10,9 @@
 
   vars_files:
     - vars/jenkins.yml
+    - vars/jenkins-plugins.yml
 
   roles:
     - ossl-common
     - ossl-jenkins-master
+    - ossl-jenkins-client

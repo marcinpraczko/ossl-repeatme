@@ -2,7 +2,7 @@
 # Tasks: Setup firewall rule for Jenkins
 # Working with: ansible: 1.2
 
-- name: OSSL-Jenkins master | Setup firewall with rules for jenkins
+- name: OSSL-Common | Setup firewall - iptables
   template: src=iptables.j2 dest=/etc/sysconfig/iptables owner=root group=root mode=0600
   tags:
   - iptables

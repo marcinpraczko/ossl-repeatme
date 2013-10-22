@@ -8,14 +8,16 @@
 # - Download key first then import from file, not run 'download' for each run of ansible
 #   This will speed up run playbook a bit
 
+# TODO: Change these 2 tasks for module rpm-key from Ansible 1.3
+# LINK: http://www.ansibleworks.com/docs/modules.html#rpm-key
 - name: OSSL-Jenkins master | Download RPM Key
-  get_url: url={{ gossl_jenkins_key }} dest={{ gossl_jenkins_key_local }}
+  get_url: url={{ gossl_jenkins.key }} dest={{ gossl_jenkins.key_local }}
     owner=root group=root mode=0600 force=no
 
 - name: OSSL-Jenkins master | Import RPM key
-  shell: rpm --import {{ gossl_jenkins_key_local }}
+  shell: rpm --import {{ gossl_jenkins.key_local }}
 
 - name: OSSL-Jenkins master | Download Yum repository file
-  get_url: url={{ gossl_jenkins_repo }}
+  get_url: url={{ gossl_jenkins.repo }}
     dest=/etc/yum.repos.d/jenkins.repo
-    owner=root group=root mode=0600 force=no
+    owner=root group=root mode=0644 force=no

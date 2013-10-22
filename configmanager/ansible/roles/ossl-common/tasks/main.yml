@@ -8,3 +8,6 @@
   with_items:
     - ossl-ansible-cfg
     - ossl-ansible-cfg/cache
+
+# Configure firewall
+- include: iptables.yml

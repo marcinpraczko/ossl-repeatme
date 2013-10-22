@@ -1,10 +1,10 @@
 ---
-# Tasks: Install jenkins
+# Tasks: Install jenkins master
 # Working with: ansible: 1.2
 
 - name: OSSL-Jenkins master | Install Jenkins dependencies
   yum: name={{ item }} state=present
-  with_items: ${jenkins_dependencies}
+  with_items: ${gossl_jenkins.dependencies}
 
 - name: OSSL-Jenkins master | Intall Jenkins from yum repo
   yum: name=jenkins state=present

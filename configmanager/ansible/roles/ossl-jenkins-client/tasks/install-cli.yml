@@ -1,0 +1,46 @@
+---
+# Tasks: Install jenkins cli
+# Working with: ansible: 1.2
+
+# After installation or updating jenkins time is requried to run jenkins
+- name: OSSL-Jenkins cli | 45s delay while starting Jenkins
+  wait_for: port=8080 delay=45
+  when: "{{ jenkins_service.changed }}"
+
+# Create Jenkins CLI destination directory
+- name: OSSL-Jenkins cli | Create Jenkins CLI destination directory
+  file: path={{ gossl_jenkins.dest_dir }} state=directory
+
+# Get Jenkins CLI from localhost
+- name: OSSL-Jenkins cli | Get Jenkins CLI from localhost URL
+  get_url: url=http://localhost:8080/jnlpJars/jenkins-cli.jar 
+    dest={{ gossl_jenkins.dest_cli }}
+    mode=0440
+
+# Get latest Jenkins update file
+- name: OSSL-Jenkins cli | Get Jenkins updates
+  get_url: url=http://updates.jenkins-ci.org/update-center.json 
+    dest={{ gossl_jenkins.dest_updates }} thirsty=yes mode=0440
+  register: jenkins_updates
+
+# Jenkins Update-center
+- name: OSSL-Jenkins cli | Update-center Jenkins
+  shell: "cat {{ gossl_jenkins.dest_updates }} | sed '1d;$d' | curl -X POST -H 'Accept: application/json' -d @- http://localhost:8080/updateCenter/byId/default/postBack"
+  when: "{{ jenkins_updates.changed }}"
+
+# Install/update Jenkins plugins
+- name: OSSL-Jenkins cli | Install/update plugins
+  command: java -jar {{ gossl_jenkins.dest_cli }} -s http://localhost:8080 install-plugin {{ item }}
+  with_items: ${gossl_jenkins_plugins}
+
+# Wait for Jenkins to install plugins, assuming 30s should be sufficiant
+- name: OSSL-Jenkins cli | 60s delay while installing plugins
+  wait_for: port=8080 delay=60
+  when: "{{ jenkins_updates.changed }}"
+
+# Safe-restart Jenkins
+- name: OSSL-Jenkins cli | Safe-restart Jenkins
+  command: java -jar {{ gossl_jenkins.dest_cli }} -s http://localhost:8080 safe-restart
+  when: "{{ jenkins_updates.changed }}"
+  notify: 
+    - restart iptables

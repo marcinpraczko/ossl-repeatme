@@ -1,0 +1,15 @@
+---
+# Variables for jenkins plugins installation
+gossl_jenkins_plugins:
+  - 'ant'
+  - 'credentials'
+  - 'disk-usage'
+  - 'git'
+  - 'git-client'
+  - 'publish-over-ssh'
+  - 'ssh'
+  - 'ssh-agent'
+  - 'ssh-credentials'
+  - 'ssh-slaves'
+  - 'subversion'
+  - 'xvfb'

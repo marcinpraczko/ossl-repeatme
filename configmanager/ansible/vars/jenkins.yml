@@ -1,7 +1,12 @@
 ---
 # Variables for jenkins installation
-  gossl_jenkins_repo: 'http://pkg.jenkins-ci.org/redhat/jenkins.repo'        # Jenkins repository
-  gossl_jenkins_key: 'http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key'   # Jenkins key
-  gossl_jenkins_key_local: '/root/ossl-ansible-cfg/cache/jenkins-ci.org.key' # Jenkins key - local copy
-  jenkins_dependencies: # Jenkins dependencies
+gossl_jenkins:
+  repo: 'http://pkg.jenkins-ci.org/redhat/jenkins.repo'          # Jenkins repository
+  key: 'http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key'     # Jenkins key
+  key_local: '/root/ossl-ansible-cfg/cache/jenkins-ci.org.key'   # Jenkins key - local copy
+  # Jenkins dependencies
+  dependencies: 
     - 'java-1.7.0-openjdk.x86_64'
+  dest_dir: '/opt/jenkins'
+  dest_cli: '${gossl_jenkins.dest_dir}/jenkins-cli.jar'          # Jenkins CLI destination
+  dest_updates: '${gossl_jenkins.dest_dir}/updates_jenkins.json' # Jenkins updates file
