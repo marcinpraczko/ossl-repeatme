@@ -1,10 +1,6 @@
                                   README.txt
                                   ==========
 
-Author: Marcin Praczko
-Date: 2013-11-03 15:02:54 GMT
-
-
 Table of Contents
 =================
 1 OSSL-repeatme
