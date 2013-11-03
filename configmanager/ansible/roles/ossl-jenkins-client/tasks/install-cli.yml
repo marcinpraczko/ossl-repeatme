@@ -3,8 +3,9 @@
 # Working with: ansible: 1.2
 
 # After installation or updating jenkins time is requried to run jenkins
-- name: OSSL-Jenkins cli | 45s delay while starting Jenkins
-  wait_for: port=8080 delay=45
+# Jenkins can start quickly on port 8080 - but then jenkins need internally run engine
+- name: OSSL-Jenkins cli | 90s delay while starting Jenkins
+  wait_for: port=8080 delay=90
   when: "{{ jenkins_service.changed }}"
 
 # Create Jenkins CLI destination directory
