@@ -31,14 +31,14 @@ Table of Contents
 OSSL-repeatme is a basic project which allow repeat tasks, for example
 related with:
 - service installation
-- deploying code
+- code deployment
 
-This project should help to practice tasks related with administration.
+This project aims to help to practice tasks related with server/services administration.
 The idea is to use vagrant and ansible for quick setup services.
 
 2 Requirements 
 ---------------
-  - VirtualBox: Version >= 4.1.16 (Configured to allow run x86_64 machines).
+  - VirtualBox: Version >= 4.1.16 (configured to allow run x86_64 machines). Recommended version 4.2.x
   - Vagrant: Version = 1.2.X (on 1.3.X there are some issues with shared folders).
   - Access to internet during first setup.
 
@@ -53,8 +53,8 @@ The idea is to use vagrant and ansible for quick setup services.
 
 4 Achieved goals - so far 
 --------------------------
-  - This project allow setup CentOS 6.X 64b with installed Jenkins + default
-    jenkins plugins.
+  - This project allows to setup CentOS 6.X 64bit with pre-installed Jenkins + default Jenkins plugins.
+
 
 5 Quick setup 
 --------------
@@ -64,25 +64,31 @@ The idea is to use vagrant and ansible for quick setup services.
 
 5.1.1 Run Vagrant VM 
 ~~~~~~~~~~~~~~~~~~~~~
-   - After check-out from git repository, please go to main console VM
+  - After cloning git repository, please navigate to main console folder (we call it ossl-console)
 
 
   cd ossl-repeatme/vagrantfiles/ossl-main_console
   vagrant up
 
+   - Vagrant will download the VM image. 
+   - Vagrant should boot VM under VirtualBox.
+   - Vagrant should install ansible from EPEL repository.
 
-   - Vagrant should boot VM under VirtualBox
-   - Vagrant should install ansible from EPEL repository
-
-5.1.2 Get access to OSSL main console VM 
+5.1.2 Get access to ossl-console VM 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    After boot VM, please make notes about port forwarding, it will be required below. Login to VM via SSH:
-    -  Connect with localhost and port 2222 (This port can be different if
-       others VMs has been running first by vagrant).
+    After vagrant boots VM, please read the output and take notes about port forwarding, it will be 
+    required to gain access to the box using SSH. 
+
+    Now you can login to VM via SSH:
+    -  Connect with localhost and port 2222 (loook at section 6.3 for access details)
+
+    Please note, that this port can vary depending if others VMs has been running by vagrant before 
+    ossl-console was started. 
+
 
 5.1.3 Initial setup for VM ossl-console 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   After login to VM please run following commands to initial setup for VM ossl-console.
+   After login to VM please run following commands to perform initial setup for VM ossl-console.
    - These commands should be run as normal user
 
 
@@ -99,7 +105,8 @@ The idea is to use vagrant and ansible for quick setup services.
 
 5.1.4 Setup jenkins on VM ossl-console 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   When initial setup has been done, jenkins can be installed by running (it will take a while)
+   When initial setup has been done, jenkins can be installed by running following command:
+   (it may take a while)
 
 
   make setup-build-hosts
@@ -120,8 +127,8 @@ The idea is to use vagrant and ansible for quick setup services.
   http://localhost:18080/
 
 
-6 Main details related with project. 
--------------------------------------
+6 Important details related to the project. 
+-------------------------------------------
 
 6.1 Internal network configuration 
 ===================================
@@ -136,6 +143,7 @@ The idea is to use vagrant and ansible for quick setup services.
 6.2 Port forwarding to guests 
 ==============================
    Current configuration has following port forwarding settings
+
   Host           Service   Port on PC   Port on VM   Info                              
  --------------+---------+------------+------------+----------------------------------
   ossl-console   SSH                                 Dynamically allocated by vagrant  
@@ -162,7 +170,8 @@ The idea is to use vagrant and ansible for quick setup services.
 
 6.4 Access to root account. 
 ============================
-   - password for root: vagrant
+   - username: root
+   - password: vagrant
    - access to root from vagrant user
 
 
@@ -171,8 +180,8 @@ The idea is to use vagrant and ansible for quick setup services.
 
 6.5 Run commands as root 
 =========================
-   - Sudo configuration allow all users belong to admin group run commands as
-     root without knowing password:
+   - Sudo configuration allows all users belonging to admin group to run commands as
+     root without knowing password
    - For example as 'vagrant' user.
 
 
@@ -181,6 +190,7 @@ The idea is to use vagrant and ansible for quick setup services.
 
 7 Summary 
 ----------
-  I hope that this project will help you repeat some configuration much more
-  quicker and enjoy working on your projects instead spending time of trying
-  repeat some configuration for long hours.
+  I hope that this project will help you to repeat some configurations much quicker. 
+  Using it you can enjoy working on your projects instead of spending countless hours trying 
+  to repeat same configurations again and again.
+
