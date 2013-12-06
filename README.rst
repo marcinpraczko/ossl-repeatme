@@ -13,17 +13,19 @@ Table of Contents
 OSSL-repeatme
 =============
 
-* Source: `<https://github.com/marcinpraczko/ossl-repeatme>`_
-* Version: 0.1.0
+:Version: 0.1.0
+:Authors: Marcin Praczko <marcin.praczko@gmail.com>
+:Source: `<https://github.com/marcinpraczko/ossl-repeatme>`_
+
+
+This project aims to help to practice tasks related with server/services administration.
+The idea is to use vagrant and ansible for quick setup services.
 
 OSSL-repeatme is a basic project which allow repeat tasks, for example
 related with:
 
 * service installation
 * code deployment
-
-This project aims to help to practice tasks related with server/services administration.
-The idea is to use vagrant and ansible for quick setup services.
 
 
 Requirements
