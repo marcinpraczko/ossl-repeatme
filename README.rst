@@ -14,7 +14,6 @@ OSSL-repeatme
 =============
 
 :Version: 0.1.0
-:Authors: Marcin Praczko <marcin.praczko@gmail.com>
 :Source: `<https://github.com/marcinpraczko/ossl-repeatme>`_
 
 
