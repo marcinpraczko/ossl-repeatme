@@ -64,20 +64,20 @@ Run Vagrant VM
   cd ossl-repeatme/vagrantfiles/ossl-main_console
   vagrant up
 
-* Vagrant will download the VM image. 
+* Vagrant will download the VM image.
 * Vagrant should boot VM under VirtualBox.
 * Vagrant should install ansible from EPEL repository.
 
 Get access to ossl-console VM
 +++++++++++++++++++++++++++++
 
-After vagrant boots VM, please read the output and take notes about port forwarding, it will be 
-required to gain access to the box using SSH. 
+After vagrant boots VM, please read the output and take notes about port forwarding, it will be
+required to gain access to the box using SSH.
 
 Now you can login to VM via SSH:
 
 **Please note**, that port below can vary depending if others VMs has been
-running by vagrant before ossl-console was started. 
+running by vagrant before ossl-console was started.
 
 * Connect with **localhost** and port **2222**
 * Username: **vagrant**
@@ -93,16 +93,16 @@ After login to VM please run following commands to perform initial setup for
 VM ossl-console. *(These commands should be run as normal user)*
 
 ::
-  
+
   cd /src/ansible
   make setup-console-init
 
 If everything is working as expected ansible should display message:
 
 ::
-  
+
   PLAY RECAP ********************************************************************
-  ossl-console               : ok=7    changed=4    unreachable=0    failed=0
+  ossl-console               : ok=9    changed=1    unreachable=0    failed=0
 
 
 Setup jenkins on VM ossl-console
@@ -148,7 +148,7 @@ Internal network configuration
 +--------------+-----------------+
 | ossl-test2   |  192.168.79.253 |
 +--------------+-----------------+
-          
+
 
 Port forwarding to guests
 -------------------------
@@ -206,7 +206,7 @@ Root user
 * access to root from vagrant user
 
 ::
-  
+
   sudo -i -u root
 
 
@@ -218,7 +218,7 @@ Run commands as root
 * For example as 'vagrant' user.
 
 ::
-  
+
   sudo ls -la /root
 
 Summary
@@ -227,4 +227,3 @@ Summary
 I hope that this project will help you to repeat some configurations much
 quicker. Using it you can enjoy working on your projects instead of spending
 countless hours trying to repeat same configurations again and again.
-

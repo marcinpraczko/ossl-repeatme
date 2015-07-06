@@ -51,5 +51,9 @@
     - /src/ansible-workspace/from_git/vagrant/keys/vagrant
     - /src/ansible-workspace/from_git/vagrant/keys/vagrant.pub
 
+- name: OSSL-Console | Add new vagrant insecure keys
+  authorized_key: user=vagrant key="{{ lookup('file', '/src/ansible-workspace/from_git/vagrant/keys/vagrant.pub') }}"
+                  state=present
+
 - name: OSSL-Console | Add localhost to know hosts on vagrant user
   script: /src/ansible/scripts/shell/ssh_add_to_knowhosts.sh >>/src/ansible-workspace/logs/scripts/ssh_add_to_knowhosts.sh.log 2>&1
