@@ -55,6 +55,10 @@ Vagrant.configure("2") do |config|
     # Jenkins
     vmtest01.vm.network :forwarded_port, guest: 8080, host: 28080
 
+    # --- Basic provisioning ---
+    # Run shell script
+    vmtest01.vm.provision :shell, :path => "../../provisioning/shell/bootstrap-cacerts.sh"
+
   end
 
   # VM - Testing VM02
@@ -78,6 +82,10 @@ Vagrant.configure("2") do |config|
 
     # Jenkins
     vmtest02.vm.network :forwarded_port, guest: 8080, host: 38080
+
+    # --- Basic provisioning ---
+    # Run shell script
+    vmtest02.vm.provision :shell, :path => "../../provisioning/shell/bootstrap-cacerts.sh"
 
   end
 

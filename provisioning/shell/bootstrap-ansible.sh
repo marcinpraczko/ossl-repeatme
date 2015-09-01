@@ -71,19 +71,6 @@ function install_yum_repository() {
     fi
 }
 
-# Issue: #8 (https://github.com/marcinpraczko/ossl-repeatme/issues/8)
-# Update ca-certs.
-# This is required to allow install others repositories (like EPEL).
-# During time CA-certificates changes and valid certs should be available
-# from the begining of provsioning.
-function update_ca_certs() {
-    echo "-> Updating ca-certificates to latest version..."
-    yum clean all
-    # When EPEL is already installed - run:
-    # yum -y upgrade --disablerepo=epel --disableplugin=fastestmirror ca-certificates 
-    yum -y upgrade --disableplugin=fastestmirror ca-certificates 
-}
-
 # Import required GPG Keys
 function import_rpm_keys() {
     echo "-> Importing GPG RPM Keys..."
@@ -134,7 +121,6 @@ function display_banner() {
 # --- Main Code ---
 display_banner
 detect_system
-update_ca_certs
 import_rpm_keys
 install_yum_repos
 install_ansible_epel

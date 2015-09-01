@@ -66,7 +66,8 @@ Vagrant.configure("2") do |config|
     console.vm.synced_folder "../../configmanager/ansible/", "/src/ansible"
 
     # --- Basic provisioning ---
-    # Run shell script
+    # Run shell scripts
+    console.vm.provision :shell, :path => "../../provisioning/shell/bootstrap-cacerts.sh"
     console.vm.provision :shell, :path => "../../provisioning/shell/bootstrap-ansible.sh"
   end
 
