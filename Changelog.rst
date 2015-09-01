@@ -2,10 +2,14 @@
 Changelog
 =========
 
+0.1.2
+=====
+*(Unreleased)*
+
 
 0.1.1
 =====
-*(Unreleased)*
+*(Released: 2015/09/02)*
 
 **New:**
 
