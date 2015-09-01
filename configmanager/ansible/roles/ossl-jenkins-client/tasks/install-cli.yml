@@ -53,9 +53,9 @@
 # Install/update Jenkins plugins
 - name: OSSL-Jenkins cli | Install/update plugins
   command: java -jar {{ gossl_jenkins.dest_cli }} -s http://localhost:8080 install-plugin {{ item }}
-  with_items: ${gossl_jenkins_plugins}
+  with_items: "{{ gossl_jenkins_plugins }}"
 
-# Wait for Jenkins to install plugins, assuming 30s should be sufficiant
+# Wait for Jenkins to install plugins, assuming 60s should be sufficiant
 - name: OSSL-Jenkins cli | 60s delay while installing plugins
   wait_for: port=8080 delay=60
   when: "{{ jenkins_updates.changed }}"
