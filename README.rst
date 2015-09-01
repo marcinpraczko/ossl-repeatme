@@ -13,7 +13,7 @@ Table of Contents
 OSSL-repeatme
 =============
 
-:Version: 0.1.0
+:Version: 0.1.1
 :Source: `<https://github.com/marcinpraczko/ossl-repeatme>`_
 
 
@@ -30,8 +30,8 @@ related with:
 Requirements
 ============
 
-* VirtualBox: Version >= **4.1.16** (configured to allow run x86_64 machines). Recommended version **4.2.x**
-* Vagrant: Version = **1.2.X** (on 1.3.X there are some issues with shared folders).
+* VirtualBox: Version >= **4.2.x** (configured to allow run x86_64 machines).
+* Vagrant: Version = **1.7.2**.
 * Access to internet during first setup.
 
 
