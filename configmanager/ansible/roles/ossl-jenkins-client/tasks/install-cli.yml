@@ -31,7 +31,7 @@
 
 # Create Jenkins CLI destination directory
 - name: OSSL-Jenkins cli | Create Jenkins CLI destination directory
-  file: path={{ gossl_jenkins.dest_dir }} state=directory
+  file: path={{ gossl_jenkins_dest_dir }} state=directory
 
 # Get Jenkins CLI from localhost
 - name: OSSL-Jenkins cli | Get Jenkins CLI from localhost URL
