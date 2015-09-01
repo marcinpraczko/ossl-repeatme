@@ -15,7 +15,8 @@ Changelog
 
 **Bugs:**
 
-* FIX: Update provisioning script to install EPEL repos.
+* FIX: Update ansible playbooks to work with ansible 1.9.X
+* FIX: Update provisioning script to install EPEL repos (all VMs).
 * FIX: Update ansible playbook for Vagrant SSH keys.
 
 
